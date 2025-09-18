@@ -1,0 +1,32 @@
+name: flutter_smart_search
+description: "A smart search field for Flutter that allows users to easily fetch data from APIs, sort lists, and filter results."
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: ^3.8.1
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  assets:
+    - assets/images/
+
+platforms:
+  android:
+  ios:
+
+topics:
+  - flutter
+  - search
+  - filter
+  - sort
+  - api
