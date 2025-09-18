@@ -1,3 +1,3 @@
 class AssetConstant{
-  static String noDataFiles         ="assets/image/no_data.png";
+  static String noDataFiles         ="assets/images/no_data.png";
 }
