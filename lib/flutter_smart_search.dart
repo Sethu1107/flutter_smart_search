@@ -1,4 +1,4 @@
-library flutter_smart_search;
+library;
 
 export 'src/smart_search_field.dart';
 export 'src/smart_search_controller.dart';
