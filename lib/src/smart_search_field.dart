@@ -37,7 +37,7 @@ class SmartSearchField<T> extends StatefulWidget {
   final Duration? debounceDelay;
 
   /// Suggestions UI
-  final Widget Function(T item)? itemBuilder;
+  final Widget Function(T item, int index)? itemBuilder;
   final bool isSort;
   final bool isFilter;
 
@@ -213,14 +213,16 @@ class _SmartSearchFieldState<T> extends State<SmartSearchField<T>> {
                   child: CircularProgressIndicator(strokeWidth: 2),
                 ),
               ).onVisibleKeepSpace(widget.showFieldLoader)
-                  : widget.suffixIcon ??
-                  InkWell(
-                    onTap: _onClear,
-                    child: const Icon(Icons.clear, color: Colors.red),
-                  ).onVisibleKeepSpace(_controller.text.isNotEmpty),
-              prefixIcon: widget.prefixIcon ?? const Icon(Icons.search),
+                  : InkWell(onTap: _onClear,
+                    child: widget.suffixIcon ??
+                    InkWell(
+                      onTap: _onClear,
+                      child: const Icon(Icons.clear, color: Colors.red),
+                    ).onVisibleKeepSpace(_controller.text.isNotEmpty),
+                  ),
+              prefixIcon: widget.prefixIcon,
               border: widget.border ?? const OutlineInputBorder(),
-              contentPadding: widget.contentPadding ?? EdgeInsets.zero,
+              contentPadding: widget.contentPadding ?? EdgeInsets.only(left:15),
               enabledBorder: widget.enabledBorder ??
                   OutlineInputBorder(
                     borderRadius: BorderRadius.circular(6),
@@ -272,24 +274,22 @@ class _SmartSearchFieldState<T> extends State<SmartSearchField<T>> {
                 itemBuilder: (context, index) {
                   final item = _suggestions[index];
                   if (widget.itemBuilder != null) {
-                    return widget.itemBuilder!(item);
+                    return InkWell(onTap:()=>_onSelect(item), child: widget.itemBuilder!(item,index));
                   }
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      InkWell(
-                        onTap: () => _onSelect(item),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 6, left: 10, right: 8),
-                          child: Text(
-                            widget.displayStringForOption(item),
-                            style: widget.displayTextStyle,
+                  return InkWell(onTap:()=>_onSelect(item),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [Padding(
+                            padding: const EdgeInsets.only(
+                                top: 6, left: 10, right: 8),
+                            child: Text(
+                              widget.displayStringForOption(item),
+                              style: widget.displayTextStyle,
+                            ),
                           ),
-                        ),
-                      ),
-                      const Divider(),
-                    ],
+                        const Divider(),
+                      ],
+                    ),
                   );
                 },
                 keyboardDismissBehavior:
