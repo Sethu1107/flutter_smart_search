@@ -1,6 +1,6 @@
 name: flutter_smart_search
 description: "A smart search field for Flutter that allows users to easily fetch data from APIs, sort lists, and filter results."
-version: 0.0.1
+version: 0.0.1+1
 homepage: https://github.com/Sethu1107/flutter_smart_search
 repository: https://github.com/Sethu1107/flutter_smart_search
 license: MIT

@@ -40,6 +40,7 @@ class SmartSearchField<T> extends StatefulWidget {
   final Widget Function(T item, int index)? itemBuilder;
   final bool isSort;
   final bool isFilter;
+  final Widget Function(BuildContext, int)? separatorBuilder;
 
   /// "No data" handling
   final Widget? noDataWidget;
@@ -98,6 +99,7 @@ class SmartSearchField<T> extends StatefulWidget {
     this.focusedBorder,
     this.subtitleBuilder,
     this.secondaryTextBuilder,
+    this.separatorBuilder,
   });
 
   final Color borderColor;
@@ -267,7 +269,7 @@ class _SmartSearchFieldState<T> extends State<SmartSearchField<T>> {
                 maxHeight: widget.maxHeight ??
                     MediaQuery.of(context).size.height * 0.4,
               ),
-              child: ListView.builder(
+              child: ListView.separated(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 shrinkWrap: true,
                 itemCount: _suggestions.length,
@@ -294,6 +296,9 @@ class _SmartSearchFieldState<T> extends State<SmartSearchField<T>> {
                 },
                 keyboardDismissBehavior:
                 ScrollViewKeyboardDismissBehavior.onDrag,
+                separatorBuilder: (context, index) =>
+                widget.separatorBuilder?.call(context, index) ??
+                    const Divider()
               ),
             ),
           ),

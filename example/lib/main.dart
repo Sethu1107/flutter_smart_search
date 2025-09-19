@@ -25,7 +25,10 @@ class MyApp extends StatelessWidget {
             displayStringForOption: (item) => item,
             onSelect: (item) {
               debugPrint("Selected: $item");
-            },
+            },separatorBuilder: (context, index) => const Divider(
+            color: Colors.blue,
+            thickness: 1,
+          ),
            isSort:false,isFilter:false,
             itemBuilder:(e,index)=>Padding(
               padding: EdgeInsets.only(left:8.0),
