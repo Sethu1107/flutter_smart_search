@@ -1,3 +1,5 @@
-## 0.0.1
+## 0.0.1+1
+- Minor updates (documentation/publish metadata fixes)
 
-* TODO: Describe initial release.
+## 0.0.1
+- Initial release
